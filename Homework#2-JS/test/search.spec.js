@@ -29,7 +29,7 @@ describe('search', function () {
     });
 
     //Test for tags 'mil'
-    it("should output", function () {
+    it("equivalently [db[1], db[8]", function () {
         expect(search(db, 2, 2, filterByTag, sortByDate)).toEqual([db[1], db[8]]);
     });
 });
