@@ -255,18 +255,25 @@ var db = [
     }
 ]
 
+// здесь не тот случай когда стоит делать функции в функциях, эту задачу на себя возьмут модули, когда столкнемся,
+// лучше отдельные функции, которые легко тестятся по отдельности
 function quiz(items, ...Args) {
-
+    // стоит вынести отдельной функцией preparedDB()
     var questions = JSON.parse(JSON.stringify(items));
 
+    // стоит придумать более понятное имя, может пару слов скомбинировать
     function correctness(elem, current){
         return (elem >=1  && elem <= questions[current].answers.length);
     }
 
+    // идея правильная для проверки, но структура не корректная, я описал причину в json
     function responseСheck(elem, current){
         return questions[current].answers[elem - 1].point;
     }
 
+    // это условие отдельной функцией, впрочем, это не должно быть здесь, в тестах мы тестим основной код,
+    // а не какие-то спец условия, которые срабатывают только в тестах
+    // такая практика имеет быть и связана с мок-тестами, сейчас не тот случай
     //For test (start)
     if (Args.length !== 0) {
 
@@ -277,17 +284,17 @@ function quiz(items, ...Args) {
 
         //Сhecking for correctness
         while (currentForTest < questions.length) {
-
+            // идея понятная, но почему возвращается какая-то строка вместо true / false
             if (!correctness(Args[currentForTest], currentForTest)) return 'Есть некорректные ответы';
 
             currentForTest++;
             
         }
 
-        currentForTest = 0
+        currentForTest = 0;
 
         while (currentForTest < questions.length) {
-
+            // у тебя Check содержит русскую букву, теряюсь в догадках как так
             if (responseСheck(Args[currentForTest], currentForTest)){ 
                 pointsForTest++;
             }
@@ -307,13 +314,15 @@ function quiz(items, ...Args) {
     var timeForTestInMs = 20000;
     var endDate = startDate.getTime() + timeForTestInMs;
 
+    // isTimerEnabled логичнее звучит
     function isTimeEnabled() {
         var now = new Date();
         return now <= endDate;
     }
 
+    // первое условие стоит выделить в переменную, зачем намеренно усложнять код
+    // решается отдельной функцией, код станет проще
     while (current < questions.length && isTimeEnabled()) {
-
         var answers = () => {
             var str = '';
 
@@ -325,8 +334,10 @@ function quiz(items, ...Args) {
         }
 
         var selectedAnswer = prompt(`Вопрос ${questions[current].id}/${questions.length}: ${questions[current].name} \n${answers()}`, '');
+        // опять кириллица в названии, что это?!?
         var correсtAnswer = true;
 
+        // реализация правильная, но вместо комментария стоит лучше выносить все в отдельные функции, которые легко тестить
         //Сheck if the answer is normal
         while (correсtAnswer) {
             if (correctness(selectedAnswer, current)) {

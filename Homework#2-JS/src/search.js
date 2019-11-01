@@ -118,6 +118,13 @@ function filterByTag(item, tag) {
     else return true;
 }
 
+// основная проблема одна, как и в проекте, функция search делает всё сразу, это множество отдельных функций
+// соответственно тесты такие будут крайне сложные
+// https://jsfiddle.net/7xnmv3p2/3/
+// вот набросал по домашке
+// в остальном решение вполне понятное.
+// вместо комментариев стоит ВСЕГДА думать о более осмысленном имени переменной или отдельной функции
+// комментарий выглядит зачастую как оправдание, что код получился так себе, не делай так
 
 //(items: Article[], currentPage: number, pageSize: number, filterFn: Function, sortFn: Function)
 var search = (items, currentPage, pageSize, filterFn, sortFn) => {
@@ -135,8 +142,13 @@ var search = (items, currentPage, pageSize, filterFn, sortFn) => {
 
 
     var balanceOfArticles = article.length % pageSize;
+    // нет нужды в случае .slice функции
     var numberOfPossiblePages = Math.ceil(article.length / pageSize);
 
+    // спорный момент, лучше таки возвращать [] из функции поиска, т.к. тот кто будет использовать твою функцию
+    // не захочет возиться с проверками на null, стоит ещё снабжать console.warn в случаях с чем то невалидным
+    // ещё по заданию требовалось использовать slice, который автоматом будет [] возвращать, в таких случаях, который ты отдельно проверяешь
+    // чекни мой фиддл выше
     if (numberOfPossiblePages < currentPage) return null; //If the current page is larger than possible
 
     var balance = (balanceOfArticles !== 0 && currentPage === numberOfPossiblePages) ? pageSize - balanceOfArticles : 0; //If the last page is the remainder of the division

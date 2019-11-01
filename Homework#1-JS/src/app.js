@@ -1,3 +1,4 @@
+// так, а где собственно весь мой фидбек?! даже если не исправленный, прикинь я бы сча заново начал все это проверять
 function yesOrNo(value) {
     if (typeof value == 'boolean') { return value == true ? 'Yes' : 'No'; }
     else { return null; }
@@ -54,7 +55,7 @@ function getRandomItem(list) {
         }
 
         let rnd = Math.floor(Math.random() * listLength);
-        
+
         return list[rnd];
     }
 }
