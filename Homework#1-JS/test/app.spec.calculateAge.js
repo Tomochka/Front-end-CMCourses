@@ -1,3 +1,8 @@
+// зачем здесь все эти переменные?
+// достаточно просто проверить пару дат, как я сделал ниже
+// хотя в твоём случае можно сказать получилось 100% покрытие тестами)))
+// это перебор
+// И ТАК НОРМАЛЬНО!
 var dateNow = new Date();
 var dateBeforeNowMonth = new Date(dateNow.getFullYear() - 10, dateNow.getMonth() - 1, dateNow.getDate());
 var dateAfterNowMonth = new Date(dateNow.getFullYear() - 10, dateNow.getMonth() + 1, dateNow.getDate());
@@ -8,44 +13,44 @@ var dateSameYearAndMonthBefore = new Date(dateNow.getFullYear(), dateNow.getMont
 var dateSameYearAfter = new Date(dateNow.getFullYear(), dateNow.getMonth() + 1, dateNow.getDate());
 var dateSameYearAndMonthAfter = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate() + 1);
 
-describe('calculateAge', function () {
-    it("should output null because input the text", function () {
+describe('calculateAge', () => {
+    it("should output null because input the text", () => {
         expect(calculateAge("text")).toBe(null);
     });
 
-    it("should output null because input date from the future", function () {
+    it("should output null because input date from the future", () => {
         expect(calculateAge("2032-02-02")).toBe(null);
     });
 
-    it("should output age", function () {
+    it("should output age", () => {
         expect(calculateAge(dateBeforeNowMonth)).toBe(dateNow.getFullYear() - dateBeforeNowMonth.getFullYear());
     });
 
-    it("should output age", function () {
+    it("should output age", () => {
         expect(calculateAge(dateAfterNowMonth)).toBe(dateNow.getFullYear() - dateAfterNowMonth.getFullYear() - 1);
     });
 
-    it("should output age", function () {
+    it("should output age", () => {
         expect(calculateAge(dateSameNonthBefore)).toBe(dateNow.getFullYear() - dateSameNonthBefore.getFullYear());
     });
 
-    it("should output age", function () {
+    it("should output age", () => {
         expect(calculateAge(dateSameNonthAfter)).toBe(dateNow.getFullYear() - dateSameNonthAfter.getFullYear() - 1);
     });
 
-    it("should output 0", function () {
+    it("should output 0", () => {
         expect(calculateAge(dateSameYearBefore)).toBe(0);
     });
 
-    it("should output 0", function () {
+    it("should output 0", () => {
         expect(calculateAge(dateSameYearAndMonthBefore)).toBe(0);
     });
 
-    it("should output null input date from the future", function () {
+    it("should output null input date from the future", () => {
         expect(calculateAge(dateSameYearAfter)).toBe(null);
     });
 
-    it("should output null input date from the future", function () {
+    it("should output null input date from the future", () => {
         expect(calculateAge(dateSameYearAndMonthAfter)).toBe(null);
     });
 });
