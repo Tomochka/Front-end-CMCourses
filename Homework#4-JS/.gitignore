@@ -1,7 +1,7 @@
 /node_modules/
 /.node_modules_global/
-/.eslintrc.js/
-/package.json/
-/package-lock.json/
-/sampleBeforeCompile.js/
-/.gitignore/
+.eslintrc.js
+package.json
+package-lock.json
+sampleBeforeCompile.js
+.gitignore
