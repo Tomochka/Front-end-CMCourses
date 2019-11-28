@@ -1,10 +1,10 @@
+'use strict';
 /**
  Заносим игроков. Организуем турнирную сетку в два круга между игроками
  Выводим результаты в консоль.
  Запуск через node sample.js
  */
 const players = ['Alexey', 'Artur', 'Kirill', 'Vlad'];
-'using strict';
 
 class Game {
   constructor({p1, p2}) {
